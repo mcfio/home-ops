@@ -5,13 +5,17 @@ terraform {
       name = "vsphere-talos"
     }
   }
-  required_version = "~> 1.5"
-  required_providers {
-    vsphere = {
-      source  = "hashicorp/vsphere"
-      version = "~> 2.0"
-    }
-  }
+}
+
+locals {
+  managed_versions = toset([
+    "v1.4.6",
+    "v1.4.7",
+  ])
+  managed_tags = toset([
+    "controlplane",
+    "worker",
+  ])
 }
 
 resource "vsphere_tag_category" "talos" {
@@ -24,27 +28,21 @@ resource "vsphere_tag_category" "talos" {
   ]
 }
 
-resource "vsphere_tag" "controlplane" {
-  name        = "controlplane"
+resource "vsphere_tag" "talos" {
+  for_each    = local.managed_tags
+  name        = each.key
   category_id = vsphere_tag_category.talos.id
-  description = "talos control plane machine_type"
-}
-
-resource "vsphere_tag" "worker" {
-  name        = "worker"
-  category_id = vsphere_tag_category.talos.id
-  description = "talos worker machine_type"
+  description = "talos machine_type='${each.key}'"
 }
 
 data "vsphere_content_library" "os_images" {
   name = "os-images"
 }
 
-# When a new release is created, duplicate this section of code increasing the semver appropriately
-# When no longer needing the library item, remove it.
-resource "vsphere_content_library_item" "talos_image_v1_4_6" {
-  name       = "talos-v1.4.6"
-  file_url   = "https://github.com/siderolabs/talos/releases/download/v1.4.6/vmware-amd64.ova"
+resource "vsphere_content_library_item" "talos" {
+  for_each   = local.managed_versions
+  name       = "talos-${each.key}"
+  file_url   = "https://github.com/siderolabs/talos/releases/download/${each.key}/vmware-amd64.ova"
   library_id = data.vsphere_content_library.os_images.id
 }
 
@@ -52,6 +50,6 @@ resource "vsphere_content_library_item" "talos_image_v1_4_6" {
 # this limitation exgtends to the terraform provider, at 89MB per image, not too concerned.
 resource "vsphere_content_library_item" "talos_image_latest" {
   name       = "talos-latest"
-  file_url   = "https://github.com/siderolabs/talos/releases/download/v1.4.6/vmware-amd64.ova"
+  file_url   = "https://github.com/siderolabs/talos/releases/download/v1.4.7/vmware-amd64.ova"
   library_id = data.vsphere_content_library.os_images.id
 }
