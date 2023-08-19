@@ -1,0 +1,39 @@
+# vim:filetype=yaml
+
+machine:
+  network:
+    hostname: ${hostname}
+    nameservers:
+      - 192.168.45.1
+    interfaces:
+      - interface: eth0
+        dhcp: false
+        addresses:
+          - ${ipv4_address}/24
+        routes:
+          - network: 0.0.0.0/0
+            gateway: 192.168.45.1
+        vip:
+          ip: 192.168.45.160
+  kubelet:
+    extraArgs:
+      feature-gates: CronJobTimeZone=true,GracefulNodeShutdown=true
+      rotate-server-certificates: "true"
+  time:
+    disabled: false
+    servers:
+      - time.milton.mcf.io
+
+cluster:
+  allowSchedulingOnControlPlanes: true
+  network:
+    podSubnets:
+      - ${podSubnet}
+    serviceSubnets:
+      - ${serviceSubnet}
+    cni:
+      name: none
+  extraManifests:
+    - "https://raw.githubusercontent.com/mologie/talos-vmtoolsd/master/deploy/unstable.yaml"
+  proxy:
+    disabled: true
