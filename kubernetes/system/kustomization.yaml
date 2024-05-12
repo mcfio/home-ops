@@ -11,4 +11,4 @@ resources:
   - cert-manager/app.yaml
   - piraeus-operator/app.yaml
   - linstor/app.yaml
-  - kubevirt
+  - kubevirt/app.yaml
