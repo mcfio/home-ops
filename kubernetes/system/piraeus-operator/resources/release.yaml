@@ -12,8 +12,8 @@ spec:
       chart: piraeus-operator
       version: 2.5.1
       sourceRef:
-        kind: HelmRepository
-        name: piraeus-charts
+        kind: GitRepository
+        name: piraeus-operator-chart
         namespace: piraeus-datastore
   install:
     crds: CreateReplace
