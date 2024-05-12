@@ -14,7 +14,7 @@ spec:
       version: 1.13.0
       sourceRef:
         kind: GitRepository
-        name: kubeovn-master-charts
+        name: kubeovn-master-chart
         namespace: kube-system
   install:
     crds: CreateReplace
