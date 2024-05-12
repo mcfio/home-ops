@@ -14,7 +14,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: kubelet-csr-approver-charts
-        namespace: flux-system
+        namespace: kube-system
   upgrade:
     cleanupOnFail: true
   uninstall:
