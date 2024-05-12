@@ -1,0 +1,94 @@
+---
+# -- cluster mesh configuration
+cluster:
+  name: fleet-cluster
+  id: 100
+
+# -- roll out cilium agent pods automatically when configmap is updated.
+rollOutCiliumPods: true
+
+# -- use Talos KubePrism endpoint for k8s service host
+k8sServiceHost: 127.0.0.1
+k8sServicePort: 7445
+
+# -- Enable native routing mode
+routingMode: native
+ipv4NativeRoutingCIDR: 10.244.0.0/18
+autoDirectNodeRoutes: false
+
+# -- disable BPF and IPv4 masquerading
+bpf:
+  masquerade: false
+enableIPv4Masquerade: false
+
+# -- configure IPAM from kubernetes configuration
+ipam:
+  mode: kubernetes
+
+# -- configure L2 announcements - listen for CRD configurations
+l2announcements:
+  enabled: true
+  leaseDuration: 120s
+  leaseRenewDeadline: 60s
+  leaseRetryPeriod: 1s
+
+# -- configure the kube-proxy replacement in Cilium BPF datapath
+kubeProxyReplacement: true
+kubeProxyReplacementHealthzBindAddr: 0.0.0.0:10256
+
+# -- configure the maglev table size and hashseed
+maglev:
+  tableSize: 1021
+  hashSeed: "kjS9P8J5eNMVcY2x"
+
+# -- configure loadBalancer
+loadBalancer:
+  algorithm: maglev
+
+# -- configure the cilium-operator component.
+operator:
+  rollOutPods: true
+  replicas: 1
+
+hubble:
+  enabled: false
+
+# -- enable external IP service support
+externalIPs:
+  enabled: true
+
+# -- configure cgroup related configuration for talos systems
+cgroup:
+  autoMount:
+    enabled: false
+  hostRoot: /sys/fs/cgroup
+
+# -- configure chaining on top of other CNI plugins.
+cni:
+  chainingMode: generic-veth
+  customConf: true
+  configMap: cni-configuration
+
+# -- disable identity marking
+enableIdentityMark: false
+
+# -- configure security context that is compatible with talos
+securityContext:
+  capabilities:
+    ciliumAgent:
+      - CHOWN
+      - KILL
+      - NET_ADMIN
+      - NET_RAW
+      - IPC_LOCK
+      - SYS_ADMIN
+      - SYS_RESOURCE
+      - DAC_OVERRIDE
+      - FOWNER
+      - SETGID
+      - SETUID
+    cleanCiliumState:
+      - NET_ADMIN
+      - SYS_ADMIN
+      - SYS_RESOURCE
+
