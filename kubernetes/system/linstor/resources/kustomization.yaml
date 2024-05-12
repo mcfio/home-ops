@@ -6,6 +6,7 @@ resources:
   # Flux Kustomizations
   - issuer.yaml
   - certificate.yaml
+  - api-tls.yaml
   - satellite-host-network.yaml
   - satellite-talos-override.yaml
   - satellite-configuration.yaml
