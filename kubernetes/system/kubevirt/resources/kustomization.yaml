@@ -10,6 +10,6 @@ patches:
       group: v1
       kind: Namespace
     patch: |
-      - op: add
+      - op: replace
         path: /metadata/labels
-      value: { "pod-security.kubernetes.io/enforce": "privileged" }
+        value: { "pod-security.kubernetes.io/enforce": "privileged" }
