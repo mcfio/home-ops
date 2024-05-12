@@ -1,4 +1,7 @@
 ---
+image:
+  pullPolicy: Always
+
 MASTER_NODES_LABEL: "node-role.kubernetes.io/control-plane"
 
 networking:
