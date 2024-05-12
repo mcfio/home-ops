@@ -18,3 +18,5 @@ spec:
     name: home-ops-kubernetes
     namespace: flux-system
   wait: true
+  dependsOn:
+    - name: cilium
