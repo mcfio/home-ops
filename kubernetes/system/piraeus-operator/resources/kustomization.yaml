@@ -3,9 +3,9 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
+  # Base Kustomizations
+  - namespace.yaml
+  - repository.yaml
   # Flux Kustomizations
-  - flux-system
-  - cilium/app.yaml
-  - kubelet-csr-approver/app.yaml
-  - cert-manager/app.yaml
-  - piraeus-operator/app.yaml
+  - issuer.yaml
+  - release.yaml
