@@ -9,7 +9,7 @@ spec:
   maxHistory: 3
   chart:
     spec:
-      chart: piraeus-operator
+      chart: charts/piraeus
       version: 2.5.1
       sourceRef:
         kind: GitRepository
