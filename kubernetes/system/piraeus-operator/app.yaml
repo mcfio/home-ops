@@ -12,9 +12,9 @@ spec:
       app.kubernetes.io/name: *appname
   interval: 2h
   path: ./kubernetes/system/piraeus-operator/resources
-  prune: false
+  prune: true
   sourceRef:
     kind: GitRepository
     name: home-ops-kubernetes
     namespace: flux-system
-  wait: true
+  wait: false
