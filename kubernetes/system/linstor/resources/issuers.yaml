@@ -6,3 +6,11 @@ metadata:
 spec:
   ca:
     secretName: linstor-internal-ca
+---
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: linstor-api-ca
+spec:
+  ca:
+    secretName: linstor-api-ca
