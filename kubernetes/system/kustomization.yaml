@@ -7,3 +7,4 @@ resources:
   - flux-system
   - cilium/app.yaml
   - kubelet-csr-approver/app.yaml
+  - cert-manager/app.yaml
