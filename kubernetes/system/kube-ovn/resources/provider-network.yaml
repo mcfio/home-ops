@@ -1,0 +1,11 @@
+---
+apiVersion: kubeovn.io/v1
+kind: ProviderNetwork
+metadata:
+  name: bridge1
+spec:
+  defaultInterface: eno2
+  customInterfaces:
+    - interface: eno2
+      nodes:
+        - talos-node01

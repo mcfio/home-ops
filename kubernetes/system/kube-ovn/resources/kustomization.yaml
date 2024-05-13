@@ -5,6 +5,7 @@ kind: Kustomization
 resources:
   - repository.yaml
   - release.yaml
+  - provider-network.yaml
 configMapGenerator:
   - name: kubeovn-values
     files:
