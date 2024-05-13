@@ -1,0 +1,20 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: &appname milton-home
+  namespace: tenants
+spec:
+  targetNamespace: milton-home
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *appname
+  interval: 2h
+  path: ./kubernetes/tenants/milton-home
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-ops-kubernetes
+    namespace: flux-system
+  wait: false
