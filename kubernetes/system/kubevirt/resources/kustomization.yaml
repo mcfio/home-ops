@@ -3,22 +3,18 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  # Base Kustomizations
-  - namespace.yaml
   # Kubevirt
   - https://github.com/kubevirt/kubevirt/releases/download/v1.2.0/kubevirt-operator.yaml
   - kubevirt-cr.yaml
   # Kubevirt CDI
-  - https://github.com/kubevirt/containerized-data-importer/releases/download/v1.59.0/cdi-operator.yaml
-  - cdi-cr.yaml
+  # - https://github.com/kubevirt/containerized-data-importer/releases/download/v1.59.0/cdi-operator.yaml
+  # - cdi-cr.yaml
 patches:
   # add podsecurity admission settings to namespace
   - target:
       group: v1
       kind: Namespace
     patch: |
-      $patch: delete
-      apiVersion: v1
-      kind: Namespace
-      metadata:
-        name: not-used
+      - op: add
+        path: /metadata/labels/pod-security.kubernetes.io~1enforce
+        value: privileged
