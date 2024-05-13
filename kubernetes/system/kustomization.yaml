@@ -12,3 +12,4 @@ resources:
   - piraeus-operator/app.yaml
   - linstor/app.yaml
   - kubevirt/app.yaml
+  - kubevirt/addons.yaml
