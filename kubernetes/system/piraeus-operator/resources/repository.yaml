@@ -1,11 +1,11 @@
-# ---
-# apiVersion: source.toolkit.fluxcd.io/v1beta2
-# kind: HelmRepository
-# metadata:
-#   name: piraeus-charts
-# spec:
-#   interval: 24h
-#   url: https://piraeus.io/helm-charts/
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: piraeus-charts
+spec:
+  interval: 24h
+  url: https://piraeus.io/helm-charts/
 ---
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: GitRepository
