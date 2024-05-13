@@ -8,9 +8,9 @@ vars:
 includes:
   talos: .taskfiles/talos/taskfile.yaml
   flux: .taskfiles/flux/taskfile.yaml
+  k8s: .taskfiles/k8s/taskfile.yaml
 
 tasks:
-
   default:
     silent: true
     cmd: go-task -l
