@@ -1,0 +1,18 @@
+---
+apiVersion: piraeus.io/v1
+kind: LinstorSatelliteConfiguration
+metadata:
+  name: talos-node01-storagepool
+spec:
+  nodeSelector:
+    kubernetes.io/hostname: talos-node01
+  storagePools:
+    - name: pool1
+      zfsThinPool:
+        zPool: storage
+      source:
+        hostDevices:
+          - /dev/sdc
+          - /dev/sdd
+          - /dev/sde
+          - /dev/sdf
