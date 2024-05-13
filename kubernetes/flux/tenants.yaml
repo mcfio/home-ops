@@ -3,11 +3,11 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: system
+  name: tenants
   namespace: flux-system
 spec:
   interval: 2h
-  path: ./kubernetes/system
+  path: ./kubernetes/tenants
   prune: true
   retryInterval: 1m
   sourceRef:
