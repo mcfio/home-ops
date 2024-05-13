@@ -7,7 +7,7 @@ spec:
   id: 0
   provider: bridge1
 ---
-iapiVersion: kubeovn.io/v1
+apiVersion: kubeovn.io/v1
 kind: Subnet
 metadata:
   name: client-network
