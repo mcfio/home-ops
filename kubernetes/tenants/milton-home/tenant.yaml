@@ -20,3 +20,4 @@ spec:
   wait: false
   dependsOn:
     - name: tenants
+      namespace: flux-system
