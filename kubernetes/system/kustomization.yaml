@@ -6,6 +6,7 @@ resources:
   # Flux Kustomizations
   - flux-system
   - kube-ovn/app.yaml
+  - kube-ovn/configs.yaml
   - cilium/app.yaml
   - kubelet-csr-approver/app.yaml
   - cert-manager/app.yaml
