@@ -1,0 +1,11 @@
+---
+apiVersion: kubeovn.io/v1
+kind: IPPool
+metadata:
+  name: milton-home
+spec:
+  subnet: client-network
+  ips:
+    - 192.168.30.90..192.168.30.109
+  namespaces:
+    - milton-home
