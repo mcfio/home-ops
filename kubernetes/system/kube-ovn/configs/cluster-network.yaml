@@ -17,4 +17,4 @@ spec:
   gateway: 192.168.45.1
   vlan: vlan45
   namespaces:
-    - cluster-network
+    - milton-cluster
