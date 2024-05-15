@@ -1,0 +1,11 @@
+---
+apiVersion: kubeovn.io/v1
+kind: IPPool
+metadata:
+  name: milton-cluster
+spec:
+  subnet: cluster-network
+  ips:
+    - 192.168.45.75..192.168.45.85
+  namespaces:
+    - milton-cluster
