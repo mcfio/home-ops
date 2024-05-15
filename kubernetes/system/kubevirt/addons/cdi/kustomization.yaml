@@ -9,7 +9,6 @@ resources:
 patches:
   # add podsecurity admission settings to namespace
   - target:
-      group: v1
       kind: Namespace
     patch: |
       - op: add
