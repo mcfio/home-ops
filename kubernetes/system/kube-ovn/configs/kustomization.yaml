@@ -5,3 +5,4 @@ kind: Kustomization
 resources:
   - provider-network.yaml
   - client-network.yaml
+  - cluster-network.yaml
