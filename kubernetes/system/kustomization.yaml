@@ -3,14 +3,12 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  # Flux Kustomizations
-  - flux-system
   - cilium/app.yaml
   - kube-ovn/app.yaml
   # - kube-ovn/configs.yaml
   - kubelet-csr-approver/app.yaml
+  - flux-system
   - cert-manager/app.yaml
   - piraeus-datastore
-  # - linstor/app.yaml
   # - kubevirt/app.yaml
   # - kubevirt/addons.yaml
