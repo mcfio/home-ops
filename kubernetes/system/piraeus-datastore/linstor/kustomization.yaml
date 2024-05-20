@@ -8,8 +8,6 @@ resources:
   - certificates.yaml
   - cluster.yaml
   # Satellite Configurations
-  - satellite-host-network.yaml
-  - satellite-talos-override.yaml
   - satellite-configuration.yaml
-  - satellite-talos-node01.yaml
+  - satellite-node01.yaml
   - storage-class.yaml
