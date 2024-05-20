@@ -24,7 +24,7 @@ spec:
     keepHistory: false
   values:
     webhook:
-      enabled: true
+      enabled: false
       tls:
         certManagerIssuerRef:
           name: piraeus-selfsigned
