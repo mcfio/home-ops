@@ -2,11 +2,11 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: piraeus-datastore-internal-ca
+  name: linstor-internal-ca
 spec:
   isCA: true
-  commonName: piraeus-datastore-internal-ca
-  secretName: piraeus-datastore-internal-ca
+  commonName: linstor-internal-ca
+  secretName: linstor-internal-ca
   duration: 87600h # 10 years
   privateKey:
     algorithm: ECDSA
@@ -23,7 +23,7 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
-  name: piraeus-datastore-internal-ca
+  name: linstor-internal-ca
 spec:
   ca:
-    secretName: piraeus-datastore-internal-ca
+    secretName: linstor-internal-ca
