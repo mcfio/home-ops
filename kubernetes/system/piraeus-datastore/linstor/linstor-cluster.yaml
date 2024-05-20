@@ -1,0 +1,14 @@
+---
+apiVersion: piraeus.io/v1
+kind: LinstorCluster
+metadata:
+  name: piraeus-datastore
+spec:
+  apiTLS:
+    certManager:
+      name: piraeus-datastore-api-ca
+      kind: Issuer
+  internalTLS:
+    certManager:
+      name: piraeus-datastore-internal-ca
+      kind: Issuer

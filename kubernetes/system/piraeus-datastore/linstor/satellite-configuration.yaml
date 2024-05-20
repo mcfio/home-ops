@@ -5,7 +5,7 @@ metadata:
 spec:
   internalTLS:
     certManager:
-      name: linstor-internal-ca
+      name: piraeus-datastore-internal-ca
       kind: Issuer
   podTemplate:
     spec:
