@@ -6,5 +6,5 @@ resources:
   # Base Kustomizations
   - namespace.yaml
   # Tenant Kustomizations
-  - milton-home/tenant.yaml
-  - milton-cluster/tenant.yaml
+  # - milton-home/tenant.yaml
+  # - milton-cluster/tenant.yaml
