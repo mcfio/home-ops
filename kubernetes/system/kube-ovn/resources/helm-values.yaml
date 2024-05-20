@@ -11,9 +11,9 @@ func:
   ENABLE_NP: false
 
 ipv4:
-  POD_CIDR: "10.244.0.0/18"
-  POD_GATEWAY: "10.244.0.1"
-  SVC_CIDR: "10.244.64.0/20"
+  POD_CIDR: "10.55.0.0/18"
+  POD_GATEWAY: "10.55.0.1"
+  SVC_CIDR: "10.55.64.0/20"
   JOIN_CIDR: "100.64.0.0/16"
 
 cni_conf:

@@ -11,7 +11,7 @@ spec:
     labels:
       app.kubernetes.io/name: *appname
   interval: 2h
-  path: ./kubernetes/system/piraeus-operator/resources
+  path: ./kubernetes/system/piraeus-datastore/operator
   prune: true
   sourceRef:
     kind: GitRepository

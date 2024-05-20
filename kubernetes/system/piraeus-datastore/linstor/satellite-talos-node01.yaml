@@ -2,10 +2,11 @@
 apiVersion: piraeus.io/v1
 kind: LinstorSatelliteConfiguration
 metadata:
-  name: talos-node01-storagepool
+  name: node01-storagepool
 spec:
   nodeSelector:
-    kubernetes.io/hostname: talos-node01
+    topology.kubernetes.io/region: fleet
+    topology.kubernetes.io/zone: node01
   storagePools:
     - name: pool1
       zfsThinPool:

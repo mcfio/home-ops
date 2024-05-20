@@ -3,6 +3,7 @@ apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
   name: piraeus-charts
+  namespace: piraeus-datastore
 spec:
   interval: 24h
   url: https://piraeus.io/helm-charts/
@@ -11,6 +12,7 @@ apiVersion: source.toolkit.fluxcd.io/v1
 kind: GitRepository
 metadata:
   name: piraeus-operator-chart
+  namespace: piraeus-datastore
 spec:
   interval: 24h
   url: https://github.com/piraeusdatastore/piraeus-operator
