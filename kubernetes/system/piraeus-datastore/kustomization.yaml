@@ -6,5 +6,5 @@ resources:
   - namespace.yaml
   - repository.yaml
   - operator.yaml
-  - linstor.yaml
+  # - linstor.yaml
   - snapshot-controller.yaml
