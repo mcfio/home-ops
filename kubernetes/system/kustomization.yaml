@@ -8,6 +8,7 @@ resources:
   # - kube-ovn/configs.yaml
   - kubelet-csr-approver/app.yaml
   - flux-system
+  - metrics-server/kustomize.yaml
   - cert-manager/app.yaml
   - piraeus-datastore
   # - kubevirt/app.yaml
