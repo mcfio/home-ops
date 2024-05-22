@@ -13,7 +13,7 @@ k8sServicePort: 7445
 
 # -- Enable native routing mode
 routingMode: native
-ipv4NativeRoutingCIDR: 10.244.0.0/18
+ipv4NativeRoutingCIDR: 10.55.0.0/18
 autoDirectNodeRoutes: false
 
 # -- disable BPF and IPv4 masquerading
@@ -91,4 +91,3 @@ securityContext:
       - NET_ADMIN
       - SYS_ADMIN
       - SYS_RESOURCE
-
