@@ -5,7 +5,7 @@ kind: Kustomization
 resources:
   - cilium/app.yaml
   - kube-ovn/app.yaml
-  # - kube-ovn/configs.yaml
+  - kube-ovn/configs.yaml
   - kubelet-csr-approver/app.yaml
   - flux-system
   - metrics-server/kustomize.yaml

@@ -7,4 +7,4 @@ resources:
   - namespace.yaml
   # Tenant Kustomizations
   # - milton-home/tenant.yaml
-  # - milton-cluster/tenant.yaml
+  - milton-cluster.yaml

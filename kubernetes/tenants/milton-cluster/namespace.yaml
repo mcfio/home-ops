@@ -5,3 +5,4 @@ metadata:
   name: milton-cluster
   labels:
     pod-security.kubernetes.io/enforce: privileged
+    pod-security.kubernetes.io/warn: privileged
