@@ -19,4 +19,4 @@ spec:
     namespace: flux-system
   wait: false
   dependsOn:
-    - name: linstor
+    - name: piraeus-linstor
