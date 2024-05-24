@@ -9,9 +9,6 @@ helmDefaults:
 repositories:
   - name: cilium
     url: https://helm.cilium.io
-  - name: kubeovn
-    url: git+https://github.com/kubeovn/kube-ovn@charts/kube-ovn
-    # url: https://kubeovn.github.io/kube-ovn/
   - name: postfinance
     url: https://postfinance.github.io/kubelet-csr-approver
 releases:
@@ -20,11 +17,6 @@ releases:
     chart: cilium/cilium
     version: 1.15.5
     values: ["../../../kubernetes/system/cilium/resources/helm-values.yaml"]
-  - name: kube-ovn
-    namespace: kube-system
-    chart: kubeovn/kube-ovn
-    values: ["../../../kubernetes/system/kube-ovn/resources/helm-values.yaml"]
-    needs: ["cilium"]
   - name: kubelet-csr-approver
     namespace: kube-system
     chart: postfinance/kubelet-csr-approver
