@@ -13,17 +13,27 @@ k8sServicePort: 7445
 
 # -- Enable native routing mode
 routingMode: native
-ipv4NativeRoutingCIDR: 10.55.0.0/18
-autoDirectNodeRoutes: false
+ipv4NativeRoutingCIDR: 10.0.0.0/8
+autoDirectNodeRoutes: true
 
-# -- disable BPF and IPv4 masquerading
+# -- enable BPF and IPv4 masquerading
 bpf:
-  masquerade: false
-enableIPv4Masquerade: false
+  masquerade: true
+enableIPv4Masquerade: true
 
 # -- configure IPAM from kubernetes configuration
 ipam:
-  mode: kubernetes
+  mode: multi-pool
+  operator:
+    autoCreateCiliumPodIPPools:
+      default:
+        ipv4:
+          cidrs: 10.55.0.0/18
+          maskSize: 27
+          # mode: kubernetes
+
+endpointRoutes:
+  enabled: true
 
 # -- configure L2 announcements - listen for CRD configurations
 l2announcements:
@@ -64,13 +74,13 @@ cgroup:
   hostRoot: /sys/fs/cgroup
 
 # -- configure chaining on top of other CNI plugins.
-cni:
-  chainingMode: generic-veth
-  customConf: true
-  configMap: cni-configuration
+# cni:
+#   chainingMode: generic-veth
+#   customConf: true
+#   configMap: cni-configuration
 
 # -- disable identity marking
-enableIdentityMark: false
+# enableIdentityMark: false
 
 # -- configure security context that is compatible with talos
 securityContext:
