@@ -19,9 +19,7 @@ autoDirectNodeRoutes: true
 # -- enable BPF and IPv4 masquerading
 bpf:
   masquerade: true
-  vlanBypass:
-    - 45
-enableIPv4Masquerade: true
+# enableIPv4Masquerade: true
 
 # -- configure IPAM from kubernetes configuration
 ipam:
