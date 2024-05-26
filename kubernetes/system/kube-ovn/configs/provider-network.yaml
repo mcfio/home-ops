@@ -4,8 +4,9 @@ kind: ProviderNetwork
 metadata:
   name: bridge1
 spec:
-  defaultInterface: eno3
+  defaultInterface: bond0
   customInterfaces:
-    - interface: eno3
+    - interface: bond0
+      # until a better selection possible
       nodes:
-        - talos-z80-u6k
+        - talos-f5e-2z7
