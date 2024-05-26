@@ -1,7 +1,7 @@
 ---
-# -- cluster mesh configuration
+# -- cluster mesh configuration.
 cluster:
-  name: fleet-cluster
+  name: host-cluster
   id: 100
 
 # -- roll out cilium agent pods automatically when configmap is updated.
@@ -13,44 +13,35 @@ k8sServicePort: 7445
 
 # -- Enable native routing mode
 routingMode: native
-ipv4NativeRoutingCIDR: 10.0.0.0/8
-autoDirectNodeRoutes: true
+ipv4NativeRoutingCIDR: 192.168.55.0/24
 
-# -- enable BPF and IPv4 masquerading
+# -- disable BPF and IPv4 masquerading.
 bpf:
-  masquerade: true
+  masquerade: false
 
-# -- configure IPAM from kubernetes configuration
+# -- disable masquerading of IPv4 traffic.
+enableIPv4Masquerade: false
+
+# -- configure CNI for chaning for kubeovn.
+cni:
+  chainingMode: generic-veth
+  customConf: true
+  configMap: cni-configuration
+
+# -- configure IPAM from kubernetes configuration.
 ipam:
-  # mode: kubernetes
-  mode: multi-pool
-  operator:
-    autoCreateCiliumPodIPPools:
-      default:
-        ipv4:
-          cidrs: 10.55.0.0/18
-          maskSize: 27
+  mode: kubernetes
 
-endpointRoutes:
-  enabled: true
-
-# -- configure L2 announcements - listen for CRD configurations
-l2announcements:
-  enabled: true
-  leaseDuration: 120s
-  leaseRenewDeadline: 60s
-  leaseRetryPeriod: 1s
-
-# -- configure the kube-proxy replacement in Cilium BPF datapath
+# -- configure the kube-proxy replacement in Cilium BPF datapath.
 kubeProxyReplacement: true
 kubeProxyReplacementHealthzBindAddr: 0.0.0.0:10256
 
-# -- configure the maglev table size and hashseed
+# -- configure the maglev table size and hashseed.
 maglev:
   tableSize: 1021
   hashSeed: "kjS9P8J5eNMVcY2x"
 
-# -- configure loadBalancer
+# -- configure loadBalancer balancing algorithm.
 loadBalancer:
   algorithm: maglev
 
@@ -59,20 +50,21 @@ operator:
   rollOutPods: true
   replicas: 1
 
+# -- disable Hubble temporarily, default enabled.
 hubble:
   enabled: false
 
-# -- enable external IP service support
+# -- enable external IP service support.
 externalIPs:
   enabled: true
 
-# -- configure cgroup related configuration for talos systems
+# -- configure cgroup related configuration for talos systems.
 cgroup:
   autoMount:
     enabled: false
   hostRoot: /sys/fs/cgroup
 
-# -- configure security context that is compatible with talos
+# -- configure security context that is compatible with talos.
 securityContext:
   capabilities:
     ciliumAgent:
