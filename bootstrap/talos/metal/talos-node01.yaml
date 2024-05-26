@@ -1,16 +1,3 @@
-hostnames:
-  - hostname: talos-node01
-    layer: platform
-links:
-  - name: eno2
-    up: true
-    layer: platform
-  - name: eno3
-    up: true
-    layer: platform
-  - name: eno4
-    up: true
-    layer: platform
 resolvers:
   - dnsServers:
       - 192.168.30.1
