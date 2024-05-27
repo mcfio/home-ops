@@ -13,24 +13,29 @@ k8sServicePort: 7445
 
 # -- Enable native routing mode
 routingMode: native
-ipv4NativeRoutingCIDR: 192.168.55.0/24
+ipv4NativeRoutingCIDR: 192.168.0.0/16
+autoDirectNodeRoutes: true
 
 # -- disable BPF and IPv4 masquerading.
 bpf:
-  masquerade: false
+  masquerade: true
 
-# -- disable masquerading of IPv4 traffic.
-enableIPv4Masquerade: false
-
-# -- configure CNI for chaning for kubeovn.
-cni:
-  chainingMode: generic-veth
-  customConf: true
-  configMap: cni-configuration
-
-# -- configure IPAM from kubernetes configuration.
+# -- configure multi-pool IPAM from kubernetes configuration.
 ipam:
-  mode: kubernetes
+  mode: multi-pool
+  operator:
+    autoCreateCiliumPodIPPools:
+      default:
+        ipv4:
+          cidrs: 10.55.0.0/18
+          maskSize: 27
+
+# -- configure L2 announcements - listen for CRD configurations
+l2announcements:
+  enabled: true
+  leaseDuration: 120s
+  leaseRenewDeadline: 60s
+  leaseRetryPeriod: 1s
 
 # -- configure the kube-proxy replacement in Cilium BPF datapath.
 kubeProxyReplacement: true
