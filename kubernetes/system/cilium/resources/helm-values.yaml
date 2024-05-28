@@ -13,12 +13,17 @@ k8sServicePort: 7445
 
 # -- Enable native routing mode
 routingMode: native
-ipv4NativeRoutingCIDR: 192.168.0.0/16
+ipv4NativeRoutingCIDR: 192.168.55.0/24
 autoDirectNodeRoutes: true
 
 # -- disable BPF and IPv4 masquerading.
 bpf:
   masquerade: true
+
+# -- Enable bandwidth manager to optimize TCP and UDP workload
+bandwidthManager:
+  enabled: true
+  # bbr: true
 
 # -- configure multi-pool IPAM from kubernetes configuration.
 ipam:
