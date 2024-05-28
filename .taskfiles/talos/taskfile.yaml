@@ -1,0 +1,72 @@
+---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: "3"
+
+vars:
+  # renovate: datasource=docker depName=ghcr.io/siderolabs/installer
+  TALOS_VERSION: v1.7.2
+  TALOS_SCHEMATIC_ID: a98805d51c6a63e868551e5ed43c4a0382346d72de93fe9526051ae995e82532
+  # renovate: datasource=docker depName=ghcr.io/siderolabs/kubelet
+  KUBERNETES_VERSION: v1.30.1
+
+tasks:
+
+  bootstrap:
+    desc: Bootstrap Talos Cluster
+    cmds:
+      - task: bootstrap-etcd
+      - task: fetch-kubeconfig
+      - task: bootstrap-apps
+
+  bootstrap-etcd:
+    desc: Bootstrap Etcd
+    cmd: until talosctl --nodes {{.controlplane}} bootstrap; do sleep 10; done
+    vars:
+      controlplane:
+        sh: talosctl config info --output json | jq --raw-output '.endpoints[0]'
+    preconditions:
+      - test -f {{.KUBERNETES_DIR}}/talosconfig
+      - talosctl config info >/dev/null 2>&1
+
+  bootstrap-apps:
+    desc: Bootstrap core apps needed for Talos
+    cmds:
+      - until kubectl wait --for=condition=Ready=False nodes --all --timeout=10m; do sleep 10; done
+      - helmfile --quiet --file {{.ROOT_DIR}}/bootstrap/talos/helmfile.yaml apply --skip-diff-on-install --suppress-diff
+      - until kubectl wait --for=condition=Ready nodes --all --timeout=10m; do sleep 10; done
+    preconditions:
+      - test -f {{.KUBERNETES_DIR}}/talosconfig
+      - talosctl config info >/dev/null 2>&1
+      - test -f {{.ROOT_DIR}}/bootstrap/talos/helmfile.yaml
+
+  fetch-kubeconfig:
+    desc: Fetch kubeconfig from Talos controllers
+    cmd: talosctl kubeconfig --nodes {{.controlplane}} --force {{.KUBERNETES_DIR}}/kubeconfig
+    vars:
+      controlplane:
+        sh: talosctl config info --output json | jq --raw-output '.endpoints[0]'
+    preconditions:
+      - test -f {{.KUBERNETES_DIR}}/{{.cluster}}/talosconfig
+      - talosctl config info >/dev/null 2>&1
+
+  apply-config:
+    desc: Apply Talos configuration to a node
+    env:
+      TALOS_VERSION: "{{.TALOS_VERSION}}"
+      TALOS_SCHEMATIC_ID: "{{.TALOS_SCHEMATIC_ID}}"
+      KUBERNETES_VERSION: "{{.KUBERNETES_VERSION}}"
+    cmd: |
+      sops -d {{.ROOT_DIR}}/bootstrap/talos/profiles/{{.role}}.sops.yaml | envsubst | \
+        talosctl machineconfig patch /dev/stdin --patch @{{.ROOT_DIR}}/bootstrap/talos/assets/{{.node}}-patch.yaml | \
+          talosctl apply-config --nodes {{.node}} --mode {{.mode}} --file /dev/stdin
+    vars:
+      mode: '{{.mode | default "no-reboot"}}'
+      role:
+        sh: talosctl --nodes {{.node}} get machineconfig -o jsonpath='{.spec.machine.type}'
+    requires:
+      vars: ["node"]
+    preconditions:
+      - test -f {{.KUBERNETES_DIR}}/talosconfig
+      - test -f {{.ROOT_DIR}}/bootstrap/talos/profiles/controlplane.sops.yaml
+      - test -f {{.ROOT_DIR}}/bootstrap/talos/assets/{{.node}}-patch.yaml
+      - talosctl --nodes {{.node}} get machineconfig >/dev/null 2>&1
