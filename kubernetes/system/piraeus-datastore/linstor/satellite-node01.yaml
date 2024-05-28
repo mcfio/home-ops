@@ -5,8 +5,8 @@ metadata:
   name: node01-storagepool
 spec:
   nodeSelector:
-    topology.kubernetes.io/region: fleet
-    topology.kubernetes.io/zone: node01
+    topology.kubernetes.io/region: host-cluster
+    topology.kubernetes.io/zone: node1
   storagePools:
     - name: pool1
       zfsThinPool:
