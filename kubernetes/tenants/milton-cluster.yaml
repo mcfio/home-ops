@@ -9,7 +9,7 @@ spec:
   targetNamespace: milton-cluster
   commonMetadata:
     labels:
-      app.kubernetes.io/name: *appname
+      tenant.mcf.io/name: *appname
   interval: 2h
   path: ./kubernetes/tenants/milton-cluster
   prune: true
