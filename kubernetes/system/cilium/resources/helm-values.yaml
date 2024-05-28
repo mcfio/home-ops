@@ -13,38 +13,16 @@ k8sServicePort: 7445
 
 # -- Enable native routing mode
 routingMode: native
-ipv4NativeRoutingCIDR: 192.168.55.0/24
-autoDirectNodeRoutes: true
+ipv4NativeRoutingCIDR: 10.55.0.0/8
 
 # -- disable BPF and IPv4 masquerading.
 bpf:
-  masquerade: true
-
-# -- Enable bandwidth manager to optimize TCP and UDP workload
-bandwidthManager:
-  enabled: true
-  # bbr: true
+  masquerade: false
+enableIPv4Masquerade: false
 
 # -- configure multi-pool IPAM from kubernetes configuration.
 ipam:
-  mode: multi-pool
-  operator:
-    autoCreateCiliumPodIPPools:
-      default:
-        ipv4:
-          cidrs: 10.55.0.0/18
-          maskSize: 18
-
-# -- Enable use of per endpoint routes
-endpointRoutes:
-  enabled: true
-
-# -- configure L2 announcements - listen for CRD configurations
-l2announcements:
-  enabled: true
-  leaseDuration: 120s
-  leaseRenewDeadline: 60s
-  leaseRetryPeriod: 1s
+  mode: kubernetes
 
 # -- configure the kube-proxy replacement in Cilium BPF datapath.
 kubeProxyReplacement: true
@@ -77,6 +55,12 @@ cgroup:
   autoMount:
     enabled: false
   hostRoot: /sys/fs/cgroup
+
+# -- configure cni for use of cilium with kube-ovn
+cni:
+  chainingMode: generic-veth
+  customConf: true
+  configMap: cni-configuration
 
 # -- configure security context that is compatible with talos.
 securityContext:
