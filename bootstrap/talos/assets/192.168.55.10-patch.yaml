@@ -6,25 +6,24 @@ machine:
   network:
     interfaces:
       - interface: bond0
-        dhcp: true
+        dhcp: false
+        addresses:
+          - 192.168.55.10/24
+        routes:
+          - network: 0.0.0.0/0
+            gateway: 192.168.55.1
         vip:
           ip: 192.168.55.50
-        vlans:
-          - vlanId: 45
-            addresses:
-              - 192.168.45.10/24
-        mtu: 9000
         bond:
           mode: 802.3ad
-          lacpRate: fast
           xmitHashPolicy: layer2+3
-          miimon: 100
-          updelay: 200
-          downdelay: 200
           deviceSelectors:
             - hardwareAddr: 14:02:ec:88:01:b4
               driver: ixgbe
             - hardwareAddr: 14:02:ec:88:01:b5
               driver: ixgbe
+      - deviceSelector:
+          hardwareAddr: 1c:98:ec:27:37:*
+        ignore: true
   nodeLabels:
     topology.kubernetes.io/zone: node1
