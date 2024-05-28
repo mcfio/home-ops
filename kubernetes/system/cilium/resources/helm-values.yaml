@@ -33,7 +33,7 @@ ipam:
       default:
         ipv4:
           cidrs: 10.55.0.0/18
-          maskSize: 27
+          maskSize: 18
 
 # -- Enable use of per endpoint routes
 endpointRoutes:
