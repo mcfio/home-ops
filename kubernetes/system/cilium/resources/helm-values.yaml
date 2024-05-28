@@ -35,6 +35,10 @@ ipam:
           cidrs: 10.55.0.0/18
           maskSize: 27
 
+# -- Enable use of per endpoint routes
+endpointRoutes:
+  enabled: true
+
 # -- configure L2 announcements - listen for CRD configurations
 l2announcements:
   enabled: true
