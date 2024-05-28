@@ -9,7 +9,7 @@ spec:
   targetNamespace: milton-home
   commonMetadata:
     labels:
-      app.kubernetes.io/name: *appname
+      tenant.mcf.io/name: *appname
   interval: 2h
   path: ./kubernetes/tenants/milton-home
   prune: true
@@ -19,5 +19,5 @@ spec:
     namespace: flux-system
   wait: false
   dependsOn:
-    - name: tenants
+    - name: system
       namespace: flux-system
