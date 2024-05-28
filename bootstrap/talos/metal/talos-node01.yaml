@@ -1,8 +1,0 @@
-resolvers:
-  - dnsServers:
-      - 192.168.30.1
-    layer: platform
-timeServers:
-  - timeServers:
-      - time.milton.mcf.io
-    layer: platform

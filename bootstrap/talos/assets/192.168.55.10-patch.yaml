@@ -1,0 +1,30 @@
+version: v1alpha1
+machine:
+  install:
+    disk: /dev/nvme0n1
+    wipe: true
+  network:
+    interfaces:
+      - interface: bond0
+        dhcp: true
+        vip:
+          ip: 192.168.55.50
+        vlans:
+          - vlanId: 45
+            addresses:
+              - 192.168.45.10/24
+        mtu: 9000
+        bond:
+          mode: 802.3ad
+          lacpRate: fast
+          xmitHashPolicy: layer2+3
+          miimon: 100
+          updelay: 200
+          downdelay: 200
+          deviceSelectors:
+            - hardwareAddr: 14:02:ec:88:01:b4
+              driver: ixgbe
+            - hardwareAddr: 14:02:ec:88:01:b5
+              driver: ixgbe
+  nodeLabels:
+    topology.kubernetes.io/zone: node1
