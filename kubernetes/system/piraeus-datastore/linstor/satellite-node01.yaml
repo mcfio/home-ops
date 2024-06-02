@@ -10,10 +10,4 @@ spec:
   storagePools:
     - name: pool1
       zfsThinPool:
-        zPool: storage
-      source:
-        hostDevices:
-          - /dev/disk/by-id/scsi-35000c500970f93c3
-          - /dev/disk/by-id/scsi-35000c5009710144b
-          - /dev/disk/by-id/scsi-35000c50097102613
-          - /dev/disk/by-id/scsi-35000c50097120007
+        zPool: zpool-local/piraeus-datastore
