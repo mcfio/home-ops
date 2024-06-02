@@ -1,12 +1,11 @@
 version: v1alpha1
 machine:
   install:
-    disk: /dev/nvme0n1
+    disk: /dev/disk/by-id/ata-KINGSTON_SA400S37120G_50026B7685340EA4
     wipe: true
   network:
     interfaces:
       - interface: bond0
-        dhcp: false
         addresses:
           - 192.168.55.10/24
         routes:
@@ -16,14 +15,17 @@ machine:
           ip: 192.168.55.50
         bond:
           mode: 802.3ad
-          xmitHashPolicy: layer2+3
+          lacpRate: fast
+          xmitHashPolicy: layer3+4
+          miimon: 100
           deviceSelectors:
-            - hardwareAddr: 14:02:ec:88:01:b4
-              driver: ixgbe
-            - hardwareAddr: 14:02:ec:88:01:b5
-              driver: ixgbe
+            - hardwareAddr: 00:a3:8e:7a:22:49
+              driver: igb
+            - hardwareAddr: 00:a3:8e:7a:22:4a
+              driver: igb
       - deviceSelector:
-          hardwareAddr: 1c:98:ec:27:37:*
+          hardwareAddr: 00:a3:8e:7a:22:*
+          driver: igb
         ignore: true
   nodeLabels:
     topology.kubernetes.io/zone: node1
