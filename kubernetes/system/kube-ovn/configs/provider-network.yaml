@@ -4,10 +4,6 @@ kind: ProviderNetwork
 metadata:
   name: bridge1
 spec:
-  # eno1/2 are used for overlay bond0
-  defaultInterface: eno3
-  customInterfaces:
-    - interface: eno4
-      # until better selection is possible
-      nodes:
-        - talos-nn9-38n
+  # enp1s0f0/1 are used for overlay bond0 for
+  # each system in the cluster (UCS C240 M4Ls)
+  defaultInterface: enp1s0f2
