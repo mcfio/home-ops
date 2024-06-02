@@ -10,4 +10,4 @@ spec:
   storagePools:
     - name: pool1
       zfsThinPool:
-        zfsPool: zpool-local/piraeus-datastore
+        zPool: zpool-local/piraeus-datastore
