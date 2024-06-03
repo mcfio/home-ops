@@ -16,5 +16,6 @@ spec:
   cidrBlock: 192.168.45.0/24
   gateway: 192.168.45.1
   vlan: vlan45
+  u2oInterconnection: true
   namespaces:
     - milton-cluster
